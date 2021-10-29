@@ -1,5 +1,4 @@
-from objects.cards.card import Card
-from objects.cards.empty import Empty
+from objects.cards.card import Card, Empty
 from settings import *
 
 
@@ -18,6 +17,10 @@ class Hand:
     def hand(self) -> list[Card]:
         return self._cards
 
+    @property
+    def is_empty(self) -> bool:
+        return len([card for card in self.hand if not card.is_empty()]) == 0
+
     def swap_card(self, start: int, end: int):
         self.hand[start], self.hand[end] = self.hand[end], self.hand[start]
 
@@ -25,16 +28,16 @@ class Hand:
         self._cards[index] = card(index)
 
     def remove_card(self, index: int):
-        raise NotImplementedError
+        self._cards[index] = Empty(index)
+
+    def get_first_card(self):
+        non_empty_cards = [x for x in self.hand if not x.is_empty()]
+        if len(non_empty_cards) == 0:
+            return None
+        return non_empty_cards[-1]
 
     def __str__(self):
         print_string = 'Cards in hand:\n'
         for card in self.hand:
             print_string += str(card) + '\n'
         return print_string
-
-
-
-
-
-

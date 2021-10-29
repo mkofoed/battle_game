@@ -13,7 +13,7 @@ class Unit(Card):
     def take_damage(self, damage: int):
         self.health -= damage
         if self.health <= 0:
-            alive = False
+            self.alive = False
 
     def buff(self, attack: int, health: int):
         self.attack += attack
@@ -24,6 +24,18 @@ class Unit(Card):
 
     def __repr__(self):
         return self.__str__()
+
+
+class TestUnit1(Unit):
+    name = "TEST1"
+    attack = 0
+    health = 0
+
+
+class TestUnit2(Unit):
+    name = "TEST2"
+    attack = 0
+    health = 0
 
 
 class Fish(Unit):
