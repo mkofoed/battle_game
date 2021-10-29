@@ -9,7 +9,7 @@ class Hand:
     name: str
     _cards: list[Unit]
 
-    def __init__(self, name: str):
+    def __init__(self, name="HAND 1"):
         self.name = name
         self._cards = []
         self._add_initial_cards()

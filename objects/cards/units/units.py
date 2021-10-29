@@ -59,3 +59,9 @@ class Cat(Unit):
     name = "Cat"
     base_attack = 2
     base_health = 1
+
+
+unit_pool = [
+    Cat,
+    Fish
+]
