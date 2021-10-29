@@ -9,10 +9,13 @@ from settings import HAND_SIZE
 class TestModels(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.hand = Hand()
+        self.hand = Hand("NAME")
 
     def test_handsize(self):
         self.assertEqual(len(self.hand.hand), 5)
+
+    def test_is_defeated(self):
+        self.assertEqual(self.hand.is_defeated(), True)
 
     def test_empty_card(self):
         self.assert_index_is_card(0, Empty)
@@ -39,14 +42,6 @@ class TestModels(unittest.TestCase):
             self.hand.add_card(TestUnit1, i)
         for i in range(HAND_SIZE):
             self.assert_index_is_card(i, TestUnit1)
-
-    def test_get_first_card(self):
-        self.hand.add_card(TestUnit2, 0)
-        self.assertIsInstance(self.hand.get_first_card(), TestUnit2)
-        self.hand.add_card(TestUnit1, 1)
-        self.assertIsInstance(self.hand.get_first_card(), TestUnit1)
-        self.hand.remove_card(1)
-        self.assertIsInstance(self.hand.get_first_card(), TestUnit2)
 
     def test_swap_cards(self):
         self.hand.add_card(TestUnit2, 0)
