@@ -28,8 +28,8 @@ class Hand:
     def swap_card(self, start: int, end: int):
         self.get_hand()[start], self.get_hand()[end] = self.get_hand()[end], self.get_hand()[start]
 
-    def add_card(self, unit_card: Card, index: int):
-        self._cards[index] = unit_card(index)
+    def add_card(self, unit: Unit, index: int):
+        self._cards[index] = unit(index)
 
     def remove_card(self, index: int):
         self._cards[index] = Empty(index)
