@@ -1,7 +1,7 @@
 import unittest
 
-from objects.cards.card import Empty
-from objects.cards.units.units import *
+from objects.cards.card import Empty, Card
+from objects.cards.units.units import TestUnit1, TestUnit2
 from objects.hand import Hand
 from settings import HAND_SIZE
 
@@ -12,7 +12,7 @@ class TestModels(unittest.TestCase):
         self.hand = Hand("NAME")
 
     def test_handsize(self):
-        self.assertEqual(len(self.hand.hand), 5)
+        self.assertEqual(len(self.hand.get_hand()), 5)
 
     def test_is_defeated(self):
         self.assertEqual(self.hand.is_defeated(), True)
@@ -23,11 +23,7 @@ class TestModels(unittest.TestCase):
     def test_hand_is_empty(self):
         self.assertEqual(self.hand.is_empty, True)
 
-    def test_add_single_fish(self):
-        self.hand.add_card(TestUnit1, 0)
-        self.assert_index_is_card(0, TestUnit1)
-
-    def test_add_single_cat(self):
+    def test_add_single_unit(self):
         self.hand.add_card(TestUnit1, 0)
         self.assert_index_is_card(0, TestUnit1)
 
@@ -53,7 +49,7 @@ class TestModels(unittest.TestCase):
         self.assert_index_is_card(1, TestUnit2)
 
     def assert_index_is_card(self, index: int, card: Card):
-        self.assertIsInstance(self.hand.hand[index], card)
+        self.assertIsInstance(self.hand.get_hand()[index], card)
 
 
 if __name__ == '__main__':

@@ -1,15 +1,12 @@
 import unittest
 
-from objects.cards.units.units import *
+from objects.cards.units.units import TestUnit1, TestUnit2, Unit
 from objects.combat import Combat
 from objects.hand import Hand
 from settings import HAND_SIZE
 
 
 class TestCombat(unittest.TestCase):
-
-    def setUp(self) -> None:
-        pass
 
     def test_combat_1(self):
         hand1 = self.add_hand_of_units('1', TestUnit1)

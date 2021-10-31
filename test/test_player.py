@@ -6,9 +6,6 @@ from settings import PLAYER_INITIAL_COINS, PLAYER_INITIAL_HEALTH
 
 class TestPlayer(unittest.TestCase):
 
-    def setUp(self) -> None:
-        pass
-
     def test_initial(self):
         player1 = Player("Player 1")
         self.assertEqual(player1.coins, PLAYER_INITIAL_COINS)
