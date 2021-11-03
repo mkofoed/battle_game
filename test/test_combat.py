@@ -2,7 +2,7 @@ import unittest
 
 from objects.cards.units.units import TestUnit1, TestUnit2, Unit
 from objects.combat import Combat
-from objects.hand import Hand
+from objects.hand import Hand, CombatHand, RunHand
 from settings import HAND_SIZE
 
 
@@ -31,11 +31,12 @@ class TestCombat(unittest.TestCase):
         self.assertIsNone(combat.winner)
 
     @staticmethod
-    def add_hand_of_units(name: str, unit: Unit) -> Hand:
-        hand = Hand(name)
+    def add_hand_of_units(name: str, unit: Unit) -> CombatHand:
+        run_hand = RunHand(name)
+        combat_hand = CombatHand(run_hand)
         for i in range(HAND_SIZE):
-            hand.add_card(unit, i)
-        return hand
+            combat_hand.add_card(unit, i)
+        return combat_hand
 
 
 if __name__ == '__main__':

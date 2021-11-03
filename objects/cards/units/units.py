@@ -15,8 +15,7 @@ class Unit(Card):
         self.hand_attack = self.base_attack
         self.hand_health = self.base_health
 
-    @property
-    def alive(self):
+    def is_alive(self):
         return self.combat_health > 0
 
     def set_combat_stats(self):

@@ -1,55 +1,49 @@
 import unittest
 
 from objects.cards.card import Empty, Card
-from objects.cards.units.units import TestUnit1, TestUnit2
-from objects.hand import Hand
+from objects.cards.units.units import TestUnit1, TestUnit2, Unit
+from objects.hand import RunHand
 from settings import HAND_SIZE
 
 
-class TestModels(unittest.TestCase):
+class TestRunHand(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.hand = Hand("NAME")
+        self.run_hand = RunHand("TEST HAND")
 
     def test_handsize(self):
-        self.assertEqual(len(self.hand.get_hand()), 5)
-
-    def test_is_defeated(self):
-        self.assertEqual(self.hand.is_defeated(), True)
-
-    def test_empty_card(self):
-        self.assert_index_is_card(0, Empty)
+        self.assertEqual(len(self.run_hand.get_hand()), 5)
 
     def test_hand_is_empty(self):
-        self.assertEqual(self.hand.is_empty, True)
+        self.assertEqual(self.run_hand.is_empty(), True)
 
     def test_add_single_unit(self):
-        self.hand.add_card(TestUnit1, 0)
-        self.assert_index_is_card(0, TestUnit1)
+        self.run_hand.add_card(TestUnit1, 0)
+        self.assert_is_unit(0, TestUnit1)
 
     def test_add_two_units(self):
-        self.hand.add_card(TestUnit2, 0)
-        self.hand.add_card(TestUnit1, 1)
-        self.assert_index_is_card(0, TestUnit2)
-        self.assert_index_is_card(1, TestUnit1)
+        self.run_hand.add_card(TestUnit2, 0)
+        self.run_hand.add_card(TestUnit1, 1)
+        self.assert_is_unit(0, TestUnit2)
+        self.assert_is_unit(1, TestUnit1)
 
     def test_add_all_fish(self):
         for i in range(HAND_SIZE):
-            self.hand.add_card(TestUnit1, i)
+            self.run_hand.add_card(TestUnit1, i)
         for i in range(HAND_SIZE):
-            self.assert_index_is_card(i, TestUnit1)
+            self.assert_is_unit(i, TestUnit1)
 
     def test_swap_cards(self):
-        self.hand.add_card(TestUnit2, 0)
-        self.hand.add_card(TestUnit1, 1)
-        self.assert_index_is_card(0, TestUnit2)
-        self.assert_index_is_card(1, TestUnit1)
-        self.hand.swap_card(0, 1)
-        self.assert_index_is_card(0, TestUnit1)
-        self.assert_index_is_card(1, TestUnit2)
+        self.run_hand.add_card(TestUnit2, 0)
+        self.run_hand.add_card(TestUnit1, 1)
+        self.assert_is_unit(0, TestUnit2)
+        self.assert_is_unit(1, TestUnit1)
+        self.run_hand.swap_card(0, 1)
+        self.assert_is_unit(0, TestUnit1)
+        self.assert_is_unit(1, TestUnit2)
 
-    def assert_index_is_card(self, index: int, card: Card):
-        self.assertIsInstance(self.hand.get_hand()[index], card)
+    def assert_is_unit(self, index: int, card: Card):
+        self.assertIsInstance(self.run_hand.get_hand()[index], card.__class__)
 
 
 if __name__ == '__main__':

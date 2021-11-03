@@ -1,17 +1,17 @@
 from typing import Optional
 
 from objects.cards.units.units import Unit
-from objects.hand import Hand
+from objects.hand import CombatHand
 
 
 class Combat:
-    hand1: Hand
-    hand2: Hand
+    hand1: CombatHand
+    hand2: CombatHand
     is_finished: bool
-    winner: Optional[Hand]
+    winner: Optional[CombatHand]
     print_result: bool
 
-    def __init__(self, hand1: Hand, hand2: Hand, print_result=False):
+    def __init__(self, hand1: CombatHand, hand2: CombatHand, print_result=False):
         self.hand1 = hand1
         self.hand2 = hand2
         self.is_finished = False
@@ -40,8 +40,7 @@ class Combat:
         self.set_winner()
 
         if self.print_result:
-            winner = self.get_winner()
-            result_str = "DRAW!" if winner is None else winner.name
+            result_str = "DRAW!" if self.winner is None else self.winner.name
             print('COMBAT OVER - RESULT IS: ' + result_str)
 
     def perform_turn(self) -> None:
@@ -51,13 +50,13 @@ class Combat:
         if self.print_result:
             print(f'{self.hand1.name}: Card 1 - {card1} takes {card2.combat_attack} damage')
             print(f'{self.hand2.name}: Card 2 - {card2} takes {card1.combat_attack} damage')
-            if card1.alive is False:
+            if card1.is_alive() is False:
                 print(f'FATALITY for {self.hand1.name}: {card1.name}')
-            if card2.alive is False:
+            if card2.is_alive() is False:
                 print(f'FATALITY for {self.hand2.name}: {card2.name}')
 
-    def get_first_cards(self) -> tuple[Unit]:
-        return self.hand1.get_first_card(), self.hand2.get_first_card()
+    def get_first_cards(self) -> tuple[Unit, Unit]:
+        return self.hand1.get_active_unit(), self.hand2.get_active_unit()
 
     def set_winner(self) -> None:
         if self.hand1.is_defeated() and self.hand2.is_defeated():

@@ -10,6 +10,9 @@ class Card(ABC):
     def is_empty(self):
         return isinstance(self, Empty)
 
+    def set_position(self, index: int):
+        self.hand_position = index
+
     @abstractmethod
     def __str__(self):
         raise NotImplementedError
