@@ -1,4 +1,5 @@
 import unittest
+from typing import Type
 
 from objects.cards.units.units import TestUnit1, TestUnit2, Unit
 from objects.combat import Combat
@@ -31,7 +32,7 @@ class TestCombat(unittest.TestCase):
         self.assertIsNone(combat.winner)
 
     @staticmethod
-    def add_hand_of_units(name: str, unit: Unit) -> CombatHand:
+    def add_hand_of_units(name: str, unit: Type[Unit]) -> CombatHand:
         run_hand = RunHand(name)
         combat_hand = CombatHand(run_hand)
         for i in range(HAND_SIZE):

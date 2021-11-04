@@ -1,4 +1,7 @@
+from __future__ import annotations
 from abc import ABC, abstractmethod
+
+import objects.hand
 
 
 class Card(ABC):
@@ -6,9 +9,10 @@ class Card(ABC):
     type: str
     value: int
     hand_position: int
+    hand: objects.hand.Hand
 
-    def is_empty(self):
-        return isinstance(self, Empty)
+    def __init__(self, hand: objects.hand.Hand):
+        self.hand = hand
 
     def set_position(self, index: int):
         self.hand_position = index
@@ -19,15 +23,3 @@ class Card(ABC):
 
     def __repr__(self):
         raise NotImplementedError
-
-
-class Empty(Card):
-    name = 'Empty'
-
-    def __init__(self, hand_position):
-        self.hand_position = hand_position
-
-    def __str__(self):
-        return f'{self.hand_position} - {self.name}'
-
-    __repr__ = __str__

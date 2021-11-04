@@ -1,6 +1,6 @@
 import unittest
 
-from objects.cards.card import Empty, Card
+from objects.cards.card import Card
 from objects.cards.units.units import TestUnit1, TestUnit2, Unit
 from objects.hand import RunHand
 from settings import HAND_SIZE
