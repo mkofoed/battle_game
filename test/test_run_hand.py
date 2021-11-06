@@ -1,6 +1,7 @@
 import unittest
 
 from objects.cards.card import Card
+from utils import TestHelpers
 from objects.cards.units.units import TestUnit1, TestUnit2, Unit
 from objects.hand import RunHand
 from settings import HAND_SIZE
@@ -27,7 +28,7 @@ class TestRunHand(unittest.TestCase):
         self.assert_is_unit(0, TestUnit2)
         self.assert_is_unit(1, TestUnit1)
 
-    def test_add_all_fish(self):
+    def test_full_hand(self):
         for i in range(HAND_SIZE):
             self.run_hand.add_card(TestUnit1, i)
         for i in range(HAND_SIZE):
@@ -42,8 +43,13 @@ class TestRunHand(unittest.TestCase):
         self.assert_is_unit(0, TestUnit1)
         self.assert_is_unit(1, TestUnit2)
 
+    def test_swap_empty(self):
+        self.run_hand.add_card(TestUnit1, 0)
+        self.assertTrue(TestHelpers.card_is_specific_unit(self.run_hand, 0, TestUnit1))
+        self.assertTrue(TestHelpers.card_is_empty(self.run_hand, 1))
+
     def assert_is_unit(self, index: int, card: Card):
-        self.assertIsInstance(self.run_hand.get_hand()[index], card.__class__)
+        self.assertIsInstance(self.run_hand.get_hand()[index], card)
 
 
 if __name__ == '__main__':

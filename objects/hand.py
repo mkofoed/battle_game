@@ -28,8 +28,7 @@ class Hand(ABC):
         hand[start], hand[end] = hand[end], hand[start]
 
     def add_card(self, unit: units.Unit, index: int) -> None:
-        self._cards[index] = unit
-        unit.hand_position = index
+        self._cards[index] = unit(index, self)
 
     def remove_card(self, index: int) -> None:
         self._cards[index] = None
