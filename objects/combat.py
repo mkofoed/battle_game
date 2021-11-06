@@ -1,5 +1,6 @@
 from typing import Optional
 
+import settings
 from objects.cards.units.units import Unit
 from objects.hand import CombatHand
 
@@ -11,13 +12,13 @@ class Combat:
     winner: Optional[CombatHand]
     print_result: bool
 
-    def __init__(self, hand1: CombatHand, hand2: CombatHand, print_result=False):
+    def __init__(self, hand1: CombatHand, hand2: CombatHand):
         self.hand1 = hand1
         self.hand2 = hand2
         self.is_finished = False
         self.hand1.initialize_combat()
         self.hand2.initialize_combat()
-        self.print_result = print_result
+        self.print_result = settings.DEBUG
 
     def perform_combat(self):
         self.pre_combat()
@@ -33,7 +34,8 @@ class Combat:
 
     def pre_combat(self) -> None:
         if self.print_result:
-            print(f'COMBAT!\n{self.hand1.name} vs. {self.hand2.name}')
+            print(f'COMBAT! between {self.hand1.name} vs. {self.hand2.name}')
+            print(f'{self.hand1} vs, {self.hand2}')
 
     def post_combat(self):
         self.is_finished = True
@@ -48,8 +50,8 @@ class Combat:
         card1.take_damage(card2.combat_attack)
         card2.take_damage(card1.combat_attack)
         if self.print_result:
-            print(f'{self.hand1.name}: Card 1 - {card1} takes {card2.combat_attack} damage')
-            print(f'{self.hand2.name}: Card 2 - {card2} takes {card1.combat_attack} damage')
+            print(f'{self.hand1.name}: {card1} takes {card2.combat_attack} damage')
+            print(f'{self.hand2.name}: {card2} takes {card1.combat_attack} damage')
             if card1.is_alive() is False:
                 print(f'FATALITY for {self.hand1.name}: {card1.name}')
             if card2.is_alive() is False:

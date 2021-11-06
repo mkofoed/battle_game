@@ -32,7 +32,7 @@ class Unit(card_cls.Card):
         self.base_health += health
 
     def __str__(self):
-        return f'Spot: {self.hand_position} - Name: {self.name} - Atk/HP: {self.run_attack}/{self.run_health}'
+        return f'[{self.hand_position}]: {self.name}({self.run_attack}/{self.run_health})'
 
     def __repr__(self):
         return self.__str__()

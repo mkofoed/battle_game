@@ -1,5 +1,7 @@
 import unittest
 
+import settings
+from utils import TestHelpers
 from objects.cards.card import Card
 from utils import TestHelpers
 from objects.cards.units.units import TestUnit1, TestUnit2, Unit
@@ -13,10 +15,12 @@ class TestRunHand(unittest.TestCase):
         self.run_hand = RunHand("TEST HAND")
 
     def test_handsize(self):
-        self.assertEqual(len(self.run_hand.get_hand()), 5)
+        self.assertEqual(len(self.run_hand.get_hand()), settings.HAND_SIZE)
 
     def test_hand_is_empty(self):
         self.assertEqual(self.run_hand.is_empty(), True)
+        for i in range(settings.HAND_SIZE):
+            self.assertTrue(TestHelpers.card_is_empty(self.run_hand, i))
 
     def test_add_single_unit(self):
         self.run_hand.add_card(TestUnit1, 0)
@@ -49,7 +53,7 @@ class TestRunHand(unittest.TestCase):
         self.assertTrue(TestHelpers.card_is_empty(self.run_hand, 1))
 
     def assert_is_unit(self, index: int, card: Card):
-        self.assertIsInstance(self.run_hand.get_hand()[index], card)
+        self.assertTrue(TestHelpers.card_is_specific_unit(self.run_hand, index, card))
 
 
 if __name__ == '__main__':
