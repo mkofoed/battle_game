@@ -1,6 +1,6 @@
 import random
 
-from exceptions import HandActionNotAllowedException
+from exceptions.exceptions import HandActionNotAllowedException
 from objects.cards.units.units import Unit, unit_pool
 from objects.hand import Hand
 from settings import UNITS_IN_SHOP

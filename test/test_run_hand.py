@@ -1,12 +1,11 @@
 import unittest
 
 import settings
-from utils import TestHelpers
 from objects.cards.card import Card
-from utils import TestHelpers
-from objects.cards.units.units import TestUnit1, TestUnit2, Unit
+from objects.cards.units.units import TestUnit1, TestUnit2
 from objects.hand import RunHand
 from settings import HAND_SIZE
+from test.utils import TestHelpers
 
 
 class TestRunHand(unittest.TestCase):

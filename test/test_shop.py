@@ -1,6 +1,6 @@
 import unittest
 
-from exceptions import HandActionNotAllowedException
+from exceptions.exceptions import HandActionNotAllowedException
 from objects.cards.units.units import TestUnit1
 from objects.shop import Shop
 
