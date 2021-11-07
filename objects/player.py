@@ -12,7 +12,7 @@ class Player:
     health: int
     _cards: list[Unit]
 
-    def __init__(self, name: str):
+    def __init__(self, name: str) -> None:
         self.name = name
         self.coins = PLAYER_INITIAL_COINS
         self.wins = 0
@@ -20,5 +20,5 @@ class Player:
         self.health = PLAYER_INITIAL_HEALTH
         self.hand = Hand(name)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'PLAYER: {self.name}'

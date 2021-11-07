@@ -1,6 +1,6 @@
 from __future__ import annotations
 from abc import ABC
-from typing import Optional
+from typing import Optional, Type
 
 import objects.cards.card as card_cls
 import objects.cards.units.units as units
@@ -12,9 +12,9 @@ class Hand(ABC):
     Base class for the different types of Hands
     """
     name: str
-    _cards: list[card_cls.Card]
+    _cards: list[Optional[card_cls.Card]]
 
-    def __init__(self, name="HAND"):
+    def __init__(self, name: str = "HAND") -> None:
         self.name = name
 
     def get_hand(self) -> list[card_cls.Card]:
@@ -27,7 +27,7 @@ class Hand(ABC):
         hand = self.get_hand()
         hand[start], hand[end] = hand[end], hand[start]
 
-    def add_card(self, unit: units.Unit, index: int) -> None:
+    def add_card(self, unit: Type[units.Unit], index: int) -> None:
         self._cards[index] = unit(index, self)
 
     def remove_card(self, index: int) -> None:
@@ -76,7 +76,7 @@ class CombatHand(Hand):
         self._cards = run_hand.get_hand()
 
     def get_active_unit(self) -> Optional[units.Unit]:
-        non_empty_cards = [card for card in self.get_non_empty() if card.is_alive() is True]
+        non_empty_cards = [unit for unit in self.get_non_empty() if unit.is_alive() is True]
         if len(non_empty_cards) == 0:
             return None
         return non_empty_cards[-1]

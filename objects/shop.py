@@ -10,11 +10,11 @@ class Shop(Hand):
     Object to store the cards in the shop. Behaves much like a RoundHand
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.roll_shop_hand(1)
 
-    def roll_shop_hand(self, current_round: int):
+    def roll_shop_hand(self, current_round: int) -> None:
         self._cards = random.choices(unit_pool, k=UNITS_IN_SHOP)
 
     def swap_card(self, start: int, end: int) -> None:

@@ -14,6 +14,10 @@ class TestCombat(unittest.TestCase):
         hand1 = self.add_hand_of_units('1', TestUnit1)
         hand2 = self.add_hand_of_units('2', TestUnit2)
         combat = Combat(hand1, hand2)
+        combat.perform_combat()
+        self.assertIsInstance(combat.winner, Hand)
+        self.assertIs(combat.winner, hand2)
+
     def test_combat_2(self):
         hand1 = self.add_hand_of_units('1', TestUnit2)
         hand2 = self.add_hand_of_units('2', TestUnit1)
