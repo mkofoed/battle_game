@@ -54,7 +54,7 @@ class RunHand(Hand):
         self._add_initial_cards()
 
     def _add_initial_cards(self):
-        for i in range(HAND_SIZE):
+        for _ in range(HAND_SIZE):
             self._cards.append(None)
 
     def get_first_card(self):

@@ -16,3 +16,5 @@ class TestHelpers:
     @staticmethod
     def card_is_empty(hand: Hand, index: int):
         return hand.get_hand()[index] is None
+
+

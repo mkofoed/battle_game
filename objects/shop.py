@@ -1,5 +1,6 @@
 import random
 
+from exceptions import HandActionNotAllowedException
 from objects.cards.units.units import Unit, unit_pool
 from objects.hand import Hand
 from settings import UNITS_IN_SHOP
@@ -18,7 +19,7 @@ class Shop(Hand):
         self._cards = random.choices(unit_pool, k=UNITS_IN_SHOP)
 
     def swap_card(self, start: int, end: int) -> None:
-        raise Exception("Action not available in Shop")
+        raise HandActionNotAllowedException(self, f'Not allowed to swap cards in Shop')
 
     def add_card(self, unit: Unit, index: int) -> None:
-        raise Exception("Action not available in Shop")
+        raise HandActionNotAllowedException(self, f'Not allowed to add cards in Shop')

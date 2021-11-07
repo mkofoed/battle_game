@@ -3,7 +3,7 @@ from objects.cards.card import Card
 
 class Item(Card):
     def __repr__(self):
-        pass
+        raise NotImplementedError
 
     def __str__(self):
-        pass
+        raise NotImplementedError
