@@ -5,7 +5,7 @@ from objects.cards.card import Card
 from objects.cards.units.units import TestUnit1, TestUnit2
 from objects.hand import RunHand
 from settings import HAND_SIZE
-from test.utils import TestHelpers
+from utils import card_is_empty, card_is_specific_unit
 
 
 class TestRunHand(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestRunHand(unittest.TestCase):
     def test_hand_is_empty(self):
         self.assertEqual(self.run_hand.is_empty(), True)
         for i in range(settings.HAND_SIZE):
-            self.assertTrue(TestHelpers.card_is_empty(self.run_hand, i))
+            self.assertTrue(card_is_empty(self.run_hand, i))
 
     def test_add_single_unit(self):
         self.run_hand.add_card(TestUnit1, 0)
@@ -48,11 +48,11 @@ class TestRunHand(unittest.TestCase):
 
     def test_swap_empty(self):
         self.run_hand.add_card(TestUnit1, 0)
-        self.assertTrue(TestHelpers.card_is_specific_unit(self.run_hand, 0, TestUnit1))
-        self.assertTrue(TestHelpers.card_is_empty(self.run_hand, 1))
+        self.assertTrue(card_is_specific_unit(self.run_hand, 0, TestUnit1))
+        self.assertTrue(card_is_empty(self.run_hand, 1))
 
     def assert_is_unit(self, index: int, card: Card):
-        self.assertTrue(TestHelpers.card_is_specific_unit(self.run_hand, index, card))
+        self.assertTrue(card_is_specific_unit(self.run_hand, index, card))
 
 
 if __name__ == '__main__':

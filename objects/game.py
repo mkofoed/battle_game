@@ -41,6 +41,3 @@ class Game:
             self.lives -= 1
 
         self.new_round()
-
-
-

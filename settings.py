@@ -10,3 +10,9 @@ UNIT_PRICE = 3
 ROLL_PRICE = 1
 
 DEBUG = False
+
+shop_unit_pool = [
+    'Cat',
+    'Fish',
+    'Dog'
+]

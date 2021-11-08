@@ -1,15 +1,20 @@
+from abc import abstractmethod
+
 import objects.cards.card as card_cls
 import objects.hand as hand_cls
 
 
 class Unit(card_cls.Card):
     name: str
+    level: int
+    tier: int
     base_attack: int
     base_health: int
     run_attack: int
     run_health: int
     combat_attack: int
     combat_health: int
+    active: bool
 
     def __init__(self, hand_position: int, hand: hand_cls.Hand):
         super().__init__(hand)
@@ -30,6 +35,14 @@ class Unit(card_cls.Card):
     def buff(self, attack: int, health: int):
         self.base_attack += attack
         self.base_health += health
+
+    @abstractmethod
+    def pre_combat_action(self):
+        pass
+
+    @abstractmethod
+    def pre_turn_action(self):
+        pass
 
     def __str__(self):
         return f'[{self.hand_position}]: {self.name}({self.run_attack}/{self.run_health})'
